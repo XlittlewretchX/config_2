@@ -23,4 +23,4 @@ python main.py <graph_path> <package_name> <result_file_path> <max_depth> <repos
 
 Например:
 
-python main.py a.dot express express_dependencies.dot 2 https://github.com/expressjs/express
+python main.py a.dot express express_dependencies.dot 2 https://registry.npmjs.org

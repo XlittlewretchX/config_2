@@ -16,7 +16,7 @@ def main():
     print(f"Analyzing package: {package_name}")
     print(f"Fetching dependencies up to depth: {max_depth}\n")
 
-    graph = build_dependency_graph(package_name, max_depth)
+    graph = build_dependency_graph(package_name, max_depth, repository_url)
     graphviz_code = generate_graphviz(graph)
 
     try:

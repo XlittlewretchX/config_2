@@ -1,6 +1,6 @@
 from npm_registry import fetch_package_info
 
-def build_dependency_graph(package_name, max_depth, current_depth=0, graph=None, visited=None):
+def build_dependency_graph(package_name, max_depth, repository_url, current_depth=0, graph=None, visited=None):
     if graph is None:
         graph = {}
     if visited is None:
@@ -12,14 +12,14 @@ def build_dependency_graph(package_name, max_depth, current_depth=0, graph=None,
     visited.add(package_name)
 
     try:
-        package_info = fetch_package_info(package_name)
+        package_info = fetch_package_info(package_name, repository_url)
         latest_version = package_info.get('dist-tags', {}).get('latest')
         dependencies = package_info.get('versions', {}).get(latest_version, {}).get('dependencies', {})
         dependency_names = list(dependencies.keys())
         graph[package_name] = dependency_names
 
         for dep in dependency_names:
-            build_dependency_graph(dep, max_depth, current_depth + 1, graph, visited)
+            build_dependency_graph(dep, max_depth, repository_url, current_depth + 1, graph, visited)
     except Exception as e:
         print(f"Warning: {e}")
 

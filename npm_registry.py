@@ -1,7 +1,7 @@
 import requests
 
-def fetch_package_info(package_name):
-    url = f"https://registry.npmjs.org/{package_name}"
+def fetch_package_info(package_name, repository_url):
+    url = f"{repository_url}/{package_name}"
     try:
         response = requests.get(url, timeout=10)
         if response.status_code != 200:
